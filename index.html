@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌻</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Lobster&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  background:#fffbea;
+  overflow-x:hidden;
+}
+
+/* HERO */
+#hero{
+  position:relative;
+  width:100vw;
+  height:100vh;
+  overflow:hidden;
+  cursor:pointer;
+}
+
+/* SUNFLOWER */
+.sunflower{
+  position:absolute;
+  width:180vw;
+  left:50%;
+  top:60%;
+  transform:translate(-50%,-50%);
+  transition:1.2s ease;
+}
+
+/* CONTENT */
+.content{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-45%,30%);
+  max-width:320px;
+  width:85%;
+  text-align:center;
+  opacity:0;
+  transition:1s ease;
+}
+
+.content h1{
+  font-family: 'Oswald', sans-serif;
+  font-size:2rem;
+  margin-bottom:10px;
+}
+
+.content p{
+  font-family: 'Oswald', sans-serif;
+  font-size:1.2rem;
+  line-height:1.6;
+}
+
+/* PHOTOS */
+.photos{
+  margin-top:20px;
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  opacity:0;
+  transform:translateY(20px);
+  transition:.8s ease;
+}
+
+.photo{
+  width:90px;
+  height:140px;
+  border-radius:14px;
+  overflow:hidden;
+}
+
+.photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* INTERACTION */
+#hero.active .sunflower{
+  left:-85%;
+  transform:translate(0,-50%);
+  opacity:0.45;
+}
+
+#hero.active .content{
+  opacity:1;
+  top:38%;
+}
+
+#hero.show-photo .photos{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:30px;
+  color:#777;
+}
+
+/* MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  opacity:0;
+  pointer-events:none;
+  transition:.4s;
+  z-index:999;
+}
+
+.modal.show{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.modal img{
+  max-width:90%;
+  max-height:75%;
+  border-radius:16px;
+}
+
+.close{
+  position:absolute;
+  top:20px;
+  right:20px;
+  font-size:2rem;
+  color:white;
+  cursor:pointer;
+}
+
+.download-btn{
+  margin-top:20px;
+  padding:10px 18px;
+  background:#fffbea;
+  border-radius:20px;
+  text-decoration:none;
+  color:#333;
+}
+</style>
+</head>
+
+<body>
+
+<section id="hero" onclick="handleTap()">
+  <img src="matahari.png" class="sunflower">
+
+  <div class="content">
+    <h1>Halo Sayangku🌻</h1>
+    <p>
+        Halo Sayang, Terima Kasih atas Kerja kerasnya <br>
+        Terima Kasih juga udah mau stay 5 bulan ini,<br>
+        Mengemban Komitmen menikah kita,<br>
+        Sayang Aku begitu Mencintai kamu,<br> 
+        Mau kah dirimu menjadi istri masa depan ku 
+        <br>🌻
+    </p>
+
+    <div class="photos">
+      <div class="photo">
+        <img src="photo1.jpeg" onclick="openModal(this.src)">
+      </div>
+      <div class="photo">
+        <img src="photo2.jpeg" onclick="openModal(this.src)">
+      </div>
+      <div class="photo">
+        <img src="photo3.png" onclick="openModal(this.src)">
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>From Calvin. For My Love, Tadya Selawangi🌻</footer>
+
+<!-- MODAL -->
+<div id="photoModal" class="modal">
+  <span class="close" onclick="closeModal()">×</span>
+  <img id="modalImg">
+  <a id="downloadBtn" class="download-btn" download>Unduh</a>
+</div>
+
+<script>
+let tap = 0;
+
+function handleTap(){
+  const hero=document.getElementById('hero');
+  tap++;
+  if(tap===1) hero.classList.add('active');
+  else if(tap===2) hero.classList.add('show-photo');
+}
+
+function openModal(src){
+  document.getElementById('modalImg').src = src;
+  document.getElementById('downloadBtn').href = src;
+  document.getElementById('photoModal').classList.add('show');
+}
+
+function closeModal(){
+  document.getElementById('photoModal').classList.remove('show');
+}
+</script>
+
+</body>
+</html>
